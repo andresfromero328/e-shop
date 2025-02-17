@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+{% block content %}
+
+   <section class="home-layout">
+      <div class="home-container">
+         {% for category in categories %}
+            <div class="category">
+               <a href="{% url 'products' category %}">- {{category}} -</a>
+            </div>
+         {% endfor %}
+
+      </div>
+   </section>
+
+{% endblock content %}

@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+{% block content %}
+
+   <section class="cart-layout">
+      <div class="cart-container">
+         <div class="cart-header">
+            <h2>{{list.name}}</h2>
+         </div>
+         {% for item in items %}
+            <div class="item-list">
+               <div class="item">
+                  <div class='item-img'>
+                     <img src="{{item.image}}" alt={{item.title}}/>
+                  </div>
+                  <div class='item-info'>
+                     <p class='name'>{{item.name}}</p>
+                     <div class='price-quant'>
+                        <p>${{item.price}}</p>
+                        <form id="buy-form" action="" method="POST">
+                           {% csrf_token %}
+                           <input type="text" value={{item.product_id}} name='add' style="display:none"/>
+                           <button class="buy" id="buy" type="submit" class='buy'>Buy</button>
+                        </form>
+                        <button class="del" name="remove" form="delete-item" type="submit" value={{item.product_id}}><i class="fas fa-trash"></i></button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         {% endfor %}
+         <form id='delete-item' method='POST'>{% csrf_token %}</form>
+      </div>
+
+
+   </section>
+
+{% endblock content %}

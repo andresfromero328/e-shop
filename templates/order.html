@@ -1,0 +1,126 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+<section class="cart-layout">
+   <div class="cart-container">
+      <div class="cart-header">
+         <a href="{% url 'cart' %}"><i class="fas fa-caret-left"></i></a>
+         <h2>Checkout - <small>Preview</small></h2>
+      </div>
+      <div class="item-section">
+         <h3>Items:</h3>
+         {% for item in cart.item.all %}
+            <div class="item-list">
+               <div class="item">
+                  <div class='item-img'>
+                     <img src="{{item.image}}" alt={{item.title}}/>
+                  </div>
+                  <div class='item-info'>
+                     <p class='name'>{{item.name}}</p>
+                     <div class='price-quant'>
+                        <p>${{item.calc_price}}</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         {% endfor %}
+      </div>
+   
+      <div class="shipping-section">
+         <h3>Total:</h3>
+         <p>{{amount}}</p>
+         {% comment %} <div class="street-num">
+            <div class="street">
+               <h4>Street:</h4>
+               <p>{{order.shipping.address_1}}</p>
+            </div>
+            {% if order.shipping.address_2 %}
+               <div class="number">
+                  <h4>Number:</h4>
+                  <p>{{order.shipping.address_2}}</p>
+               </div>
+            {% endif %}
+         </div>
+         <div class="zip-city">
+            <div class="zip">
+               <h4>Zip Code:</h4>
+               <p>{{order.shipping.zip_code}}</p>
+            </div>
+            <div class="city">
+               <h4>City:</h4>
+               <p>{{order.shipping.city}}</p>
+            </div>
+         </div> {% endcomment %}
+      </div>
+
+      <div class="payment" id="paypal-button-container"></div>
+      <div class="alert">
+         <p class="alert-msg">Products aren't real, don't attempt to add real banking info</p>
+      </div>
+   </div>
+</section>
+
+<script src="https://www.paypal.com/sdk/js?client-id=Af7dFHWAf5262Kt6Gks_ryGaGByJifbUjVIBZO6sqYCO8z6xcvO5PF-H54KhP1YWX1GoT14VlZmPro6d&currency=USD&disable-funding=credit"></script>
+<script type="text/javascript">
+   const amount = {{amount}};
+
+   function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+              const cookie = cookies[i].trim();
+              // Does this cookie string begin with the name we want?
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+  const csrftoken = getCookie('csrftoken');
+
+   function completeOrder() {
+      const url = "{% url 'order-complete' %}"
+      fetch(url, {
+         method: 'POST',
+         headers: {
+            'Content-Type':'application/json',
+            'X-CSRFToken': csrftoken,
+         },
+         body: JSON.stringify({'amount':amount})
+      })
+      .then((response) => response.json())
+      .then((data) => {
+         alert('Transaction: complete');
+         window.location.href = "{% url 'home' %}"
+      })
+   }
+
+
+   // Render the PayPal button into #paypal-button-container
+   paypal.Buttons({
+
+      // Set up the transaction
+      createOrder: function(data, actions) {
+          return actions.order.create({
+              purchase_units: [{
+                  amount: {
+                      value: amount
+                  }
+              }]
+          });
+      },
+
+      // Finalize the transaction
+      onApprove: function(data, actions) {
+          return actions.order.capture().then(function(orderData) {
+              completeOrder()
+          });
+      }
+
+
+  }).render('#paypal-button-container');
+</script>
+{% endblock content %}

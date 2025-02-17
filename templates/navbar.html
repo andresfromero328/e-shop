@@ -1,0 +1,40 @@
+{% load static %}
+<header class="navbar">
+   <nav class="navbar-links">
+
+      <div class="logo">
+         <a class="home-link" href="{% url 'home' %}"><img class="logo-img" src="{% static 'img/logo.svg' %}" alt="shopping logo">
+         <h1 class="webName">E<span class="separator">-</span>Shop</h1></a>
+      </div>
+
+      <ul class="links">
+         <li class="link"><a class="nav-links" title=" Your Picks" href="{% url 'fav-lists' %}"><i class="fas fa-heart"></i></a></li>
+         
+         <li class="link cart">
+            <span id="cart-counter" class="counter">!</span>
+            <a class="nav-links" title="Shopping Cart" href="{% url 'cart' %}">
+               <i class="fas fa-shopping-cart"></i>
+            </a>
+         </li>
+
+         {% if request.user.is_authenticated %}
+            <div class="user">
+               <button class="nav-links" id="menu-btn" title="account">
+                  <i class="fas fa-user"></i>
+                  <i class="fas fa-angle-down"></i>
+               </button>
+               <div class="drop-menu" id="drop-menu">
+                  <p class="hello-user">Hello @{{request.user.username}}</p>
+                  <a class="drop-menu_link logout" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                  <a class="drop-menu_link" href="{% url 'profile' %}"><i class="fas fa-cog"></i> Profile</a>
+               </div>
+            </div>
+         {% else %}
+            <div class="user">
+               <a class="nav-links" title="account" href="{% url 'login' %}"><i class="fas fa-user"></i> Login</a>
+            </div>
+         {% endif %}
+      </ul>
+
+   </nav>
+</header>

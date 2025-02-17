@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+{% block content %}
+
+   <section class="cart-layout">
+      <div class="cart-container">
+         <div class="cart-header">
+            <h2>Favorite Lists</h2>
+         </div>
+         <form method='POST' autocomplete="off">
+            {% csrf_token %}
+            <div class='create-list'>
+               <input class="list-name" name="new-list" type="text"/>
+               <button><i class="fas fa-plus"></i></button>
+            </div>
+         </form>
+         <div class="disp-lists">
+            {% for list in lists %}
+               <div class="list">
+                  <a href="{% url 'fav-list' list.id %}">{{list.name}}</a>
+                  <form id='delete-list' method='POST'>
+                     {% csrf_token %}
+                     <input type="text" value={{list.id}} name="delete-list" style="display:none"/>
+                     <button type='submit'><i class="fas fa-trash"></i></button>
+                  </form>
+               </div>
+            {% endfor %}
+         </div>
+      </div>
+
+
+   </section>
+
+{% endblock content %}

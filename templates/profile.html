@@ -1,0 +1,71 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+   <section class="profile-layout">
+      <div class="profile-container">
+
+         <div class="acc-attribute" href="">
+            <a href="">
+               <i class="fas fa-cart-arrow-down"></i>
+               <div class="description">
+                  <h4>Past Orders</h4>
+                  <p>Track, return, or buy again</p>
+               </div>
+            </a>
+         </div>
+
+         <div class="acc-attribute" href="">
+            <a href="">
+               <i class="fas fa-user-cog"></i>
+               <div class="description">
+                  <h4>Account & Security</h4>
+                  <p>Edit account</p>
+               </div>
+            </a>
+         </div>
+
+         <div class="acc-attribute" href="">
+            <a href="">
+               <i class="fas fa-credit-card"></i>
+               <div class="description">
+                  <h4>Payment Info</h4>
+                  <p>Manage payment methods, view transactions</p>
+               </div>
+            </a>
+         </div>
+
+         <div class="acc-attribute" href="">
+            <a href="">
+               <i class="fas fa-gift"></i>
+               <div class="description">
+                  <h4>Gift Cards</h4>
+                  <p>View valance, redeem, or reload</p>
+               </div>
+            </a>
+         </div>
+
+         <div class="acc-attribute" href="">
+            <a href="{% url 'fav-lists' %}">
+               <i class="fas fa-clipboard-list"></i>
+               <div class="description">
+                  <h4>Favorite Lists</h2>
+                  <p>Create, modify, share, and view lists</p>
+               </div>
+            </a>
+         </div>
+
+         <div class="acc-attribute" href="">
+            <a href="">
+               <i class="fas fa-inbox"></i>
+               <div class="description">
+                  <h4>Inbox</h4>
+                  <p>View and create messages</p>
+               </div>
+            </a>
+         </div>
+
+      </div>
+   </section>
+
+{% endblock content %}

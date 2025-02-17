@@ -1,0 +1,46 @@
+{% extends 'main.html' %}
+{% block content %}
+
+   <section class="cart-layout">
+      <div class="cart-container">
+         <div class="cart-header">
+            <h2>Cart</h2>
+         </div>
+         {% for item in cart.item.all %}
+            <div class="item-list">
+               <div class="item">
+                  <div class='item-img'>
+                     <img src="{{item.image}}" alt={{item.title}}/>
+                  </div>
+                  <div class='item-info'>
+                     <p class='name'>{{item.name}}</p>
+                     <div class='price-quant'>
+                        <p>${{item.calc_price}}</p>
+                        <form method='POST'>
+                           {% csrf_token %}
+                           <div class="inc-quantity">
+                              <input class="quantity" placeholder={{item.quantity}} type="number" min='1' name="new-quantity"/>
+                              <input type="text" value={{item.product_id}} name='item-to-inc' style="display:none"/>
+                              <button class="inc" type="submit"><i class="fas fa-sync"></i></i></button>
+                           </div>
+                        </form>
+
+                        <form method='POST'>
+                           {% csrf_token %}
+                           <input type="text" value={{item.product_id}} name='remove' style="display:none"/>
+                           <button class="del" type="submit"><i class="fas fa-trash"></i></button>
+                        </form>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         {% endfor %}
+         {% if cart.item %}
+         <a href="{% url 'order' %}" class='btn'>Checkout</a>
+         {% endif %}
+      </div>
+
+
+   </section>
+
+{% endblock content %}

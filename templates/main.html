@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="{% static 'img/logo.svg' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="https://kit.fontawesome.com/3494e79a08.js" crossorigin="anonymous"></script>
+    <title>E-Shopping</title>
+  </head>
+
+   <body>
+    <div class="page-wrapper">
+      {% include 'navbar.html' %}
+      
+      <main class="main">
+        {% block content %}
+
+        {% endblock %}
+      </main>
+
+      {% include 'footer.html' %}
+    </div>
+      
+      <script src="{% static 'js/script.js' %}"></script>
+      {% comment %} <script src="{% static 'js/cart.js' %}"></script> {% endcomment %}
+   </body>
+</html>

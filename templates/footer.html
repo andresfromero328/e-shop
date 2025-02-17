@@ -1,0 +1,87 @@
+{% load static %}
+<footer class="footer">
+   <div class="footer-wrapper">
+      <div class="app-traits">
+         <div class="app_traits-info">
+
+            <div class="app-trait price-info">
+               <h4>Best Prices</h4>
+               <a title="Price Matching" class="logo-vers" href=""><i class="fas fa-dollar-sign"></i></a>
+               <p class="description">If you find a lower price, we'll match it.</p>
+            </div>
+
+            <div class="app-trait shipping-info">
+               <h4>Free shipping</h4>
+               <a title="Free Shipping" class="logo-vers" href="#"><i class="fas fa-shipping-fast"></i></a> 
+               <p class="description">Online only</p>
+            </div>
+
+            <div class="app-trait refund-info">
+               <h4>Refund</h4>
+               <a title="Refund" class="logo-vers" href="#"><i class="fas fa-hand-holding-usd"></i></a>
+               <p class="description">30 day refund guarantee</p>
+            </div>
+
+            <div class="app-trait pickup-info">
+               <h4>Pick-up Locations</h4>
+               <a title="Pick-up Locations" class="logo-vers" href="#"><i class="fas fa-building"></i></a>
+               <p class="description">Check Out Pick-up Locations</p>
+            </div>
+
+         </div>
+      </div>
+
+      <div class="sub-wrapper">
+         <div class="connect">
+            <h2>Stay informed on Sales</h2>
+            <form class="form" action="">
+               <input type="email" name="user_email" placeholder="email">
+               <button type="submit"><i class="fas fa-paper-plane"></i></button>
+            </form>
+         </div>
+
+         <div class="contact">
+            <h2>Contact Us</h2>
+            <ul class="links">
+               <li class="link">(xxx)xxx-xxxx</li>
+               <ul class="links">
+                  <li class="link">Mon - Fri: 8AM - 9PM</li>
+               </ul>
+               <li class="link">xxx x xxxxxx xxx<br>xxxxx xx xxxx</li>
+            </ul>
+         </div>
+
+         <div class="services">
+            <h2>Services</h2>
+            <ul class="links">
+               <li class="link"><a href="">My Orders</a></li>
+               <li class="link"><a href="">Track My Order</a></li>
+               <li class="link"><a href="">Help Center</a></li>
+               <li class="link"><a href="">Report a Bug</a></li>
+            </ul>
+         </div>
+
+         <div class="About-us">
+            <h2>About Us</h2>
+            <ul class="links">
+               <li class="link"><a href="">About E-Shop</a></li>
+               <li class="link"><a href="">E-Shop Loyalty</a></li>
+               <li class="link"><a href="">Gift Cards</a></li>
+               <li class="link"><a href="">Credit Card</a></li>
+               <li class="link"><a href="">Career</a></li>
+               <li class="link"><a href="">Sell on E-Shop</a></li>
+               <li class="link"><a href="">Locations</a></li>
+            </ul>
+         </div>
+      </div>
+
+
+   </div>
+
+   <div class="logo-rights">
+      <a class="home-link" href="{% url 'home' %}"><img style="width: 45px; height: 45px" class="logo-img" src="{% static 'img/logo.svg' %}" alt="shopping logo">
+         <h1 class="webName">E<span class="separator">-</span>Shop</h1>
+         <p>&copy; E-Shop, Inc or its affiliates</p>
+      </a>
+   </div>
+</footer>

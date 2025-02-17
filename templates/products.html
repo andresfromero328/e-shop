@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+   <section class="products-layout">
+      <div class="products-container">
+         {% for product in products %}
+            <div class="product">
+               <div class="product-img">
+                  <img src={{product.image}} alt={{product.title}}/>
+               </div>
+               <div class="product-info">
+                  <p>{{product.title}}</p>
+                  <div class="product-rate">
+                     <p><span><i class="fas fa-star"></i></span>{{product.rating.rate}}</p>
+                     <p>{{product.rating.count}} <small>reviews</small></p>
+                  </div>
+                  <p>${{product.price}}</p>
+                  <div class="product-actions">
+                     <form id="buy-form" action="" method="POST">
+                        {% csrf_token %}
+                        <input type="text" value={{product.id}} name='add' style="display:none"/>
+                        <button id="buy" type="submit" class='buy'>Buy</button>
+                     </form>
+                     {% if request.user.is_authenticated %}
+                        <form id="list-form" action="" method="POST" autocomplete="off">
+                           {% csrf_token %}
+                           <div class="add-favList">
+                              <input type="text" value={{product.id}} name='add-list' style="display:none"/>
+                              <input type="text" name="to-list" list="list-names" class="name-selec" placeholder="add to list"/>
+                              <datalist id="list-names">
+                                 <select id="list-name">
+                                 {% for list in favLists %}
+                                 <option value="{{list.name}}">{{list.name}}</option>
+                                 {% endfor %}
+                                 </select>
+                              </datalist>
+                              <button id="fav" type="submit" class='fav'><i class="fas fa-list"></i></button>
+                           </div>
+                        </form>
+                     {% endif %}
+                  </div>
+               </div>
+            </div>
+         {% endfor %}
+
+      </div>
+   </section>
+
+{% endblock content %}

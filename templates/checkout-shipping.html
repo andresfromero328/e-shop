@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<section class="cart-layout">
+   <div class="cart-container">
+      <div class="cart-header">
+         <a href="{% url 'cart' %}"><i class="fas fa-caret-left"></i></a>
+         <h2>Checkout - <small>Info & shipping</small></h2>
+      </div>
+      <form class="form" action="" method="POST" autocomplete="off">
+         {% csrf_token %}
+         <input class="field" name="name" type="text" placeholder="Name" required value={{request.user.name}} />
+         <input class="field" name='email' type="email" placeholder="Email" required value={{request.user.email}} />
+         <input class="field" name='address_1' type="text" placeholder="Address 1" required />
+         <input class="field" name='address_2' type="text" placeholder="Apt, Suite, Unit Number..." />
+         <input class="field" name='city' type="text" placeholder="City" required />
+         <input class="field" name='zip_code' type="text" placeholder="Zip Code" required />
+         <input class="field" name='country' type="text" placeholder="Country" required />
+         <button id='preview' class="btn" type="submit">submit</button>
+      </form>
+      <a href="{% url 'order' %}" class='btn'>preview</a>   
+   </div>
+</section>
+
+{% endblock content %}
